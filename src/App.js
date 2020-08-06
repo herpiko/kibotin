@@ -27,7 +27,8 @@ import {
   EuiFlexItem,
   EuiTextArea
 } from "@elastic/eui";
-import axios from 'axios';
+import axios from "axios";
+import download from "downloadjs";
 
 import "@elastic/eui/dist/eui_theme_light.css";
 
@@ -39,9 +40,9 @@ import switch4 from "./assets/switch_type_alps.png";
 class App extends React.Component {
   state = {
     useKerf: false,
-    layout:'',
-    stabType:1,
-    switchType:1,
+    layout: "",
+    stabType: 1,
+    switchType: 1,
     stabOptions: [
       { text: "Cherry + Costar Stabilizer", value: 1 },
       { text: "Cherry Stabilizer", value: 2 },
@@ -62,29 +63,28 @@ class App extends React.Component {
   };
 
   generate = () => {
-    if (this.state.layout && this.state.layout.length < 1) {
-      alert('Layout RAW value should not be empty.');
-      return
+    if (this.state.layout === "") {
+      alert("Layout's RAW value should not be empty.");
+      return;
     }
-    let payload = {}
-    payload['layout'] = window.jsonl.parse('[' + this.state.layout + ']')
-    payload['switch-type'] = this.state.switchType
-    payload['stab-type'] = this.state.stabType
+    let payload = {};
+    payload["layout"] = window.jsonl.parse("[" + this.state.layout + "]");
+    payload["switch-type"] = this.state.switchType;
+    payload["stab-type"] = this.state.stabType;
     if (this.state.useKerf) {
-      payload['kerf'] = parseFloat(this.state.kerf)
+      payload["kerf"] = parseFloat(this.state.kerf);
     }
 
-    axios.post('/api/generate', payload)
-    .then((result) => {
-      alert('Tada!');
-    })
-    .catch((err) => {
-      console.log(err)
-      alert('An error occured: ' + err)
-    })
-
-
-  }
+    axios
+      .post("/api/generate", payload)
+      .then(result => {
+        this.setState({ outputId: result.data.id });
+      })
+      .catch(err => {
+        console.log(err);
+        alert("An error occured: " + err);
+      });
+  };
   render() {
     return (
       <div className="App">
@@ -182,14 +182,17 @@ class App extends React.Component {
                         label="Stabilizer type"
                         labelAppend={
                           <EuiText size="xs">
-                            <EuiLink href="http://builder-docs.swillkb.com/features/#stabilizer-type">Help</EuiLink>
+                            <EuiLink href="http://builder-docs.swillkb.com/features/#stabilizer-type">
+                              Help
+                            </EuiLink>
                           </EuiText>
                         }
                       >
                         <EuiSelect
+                          name="stabType"
+                          options={this.state.stabOptions}
                           value={this.state.stabType}
                           onChange={this.onValueChange}
-                          options={this.state.stabOptions}
                         />
                       </EuiFormRow>
                       <EuiFormRow
@@ -215,18 +218,78 @@ class App extends React.Component {
                       </EuiFormRow>
                       <EuiSpacer />
                       <EuiFormRow>
-                      <EuiButton fill onClick={this.generate}>
-                        Generate
-                      </EuiButton>
+                        <EuiButton fill onClick={this.generate}>
+                          Generate
+                        </EuiButton>
                       </EuiFormRow>
                     </EuiForm>
                   </EuiFlexItem>
                   <EuiFlexItem>
-                    <p>Generated SVG will be shown here.</p>
+                    {this.state.outputId && this.state.outputId.length > 0 ? (
+                      <div>
+                        <div>
+                        <EuiButton
+                          style={{margin:10}}
+                          fill
+                          onClick={() => {
+                            download(
+                              "/outputs/output_" +
+                                this.state.outputId +
+                                "_switch.svg",
+                              "output-" + this.state.outputId + ".svg",
+                              "image/svg+xml"
+                            );
+                          }}
+                        >
+                          SVG
+                        </EuiButton>
+                        <EuiButton
+                          style={{margin:10}}
+                          fill
+                          onClick={() => {
+                            download(
+                              "/outputs/output_" +
+                                this.state.outputId +
+                                "_switch.dxf",
+                              "output-" + this.state.outputId + ".dxf",
+                              "image/vnd.dwg"
+                            );
+                          }}
+                        >
+                          DXF
+                        </EuiButton>
+                        <EuiButton
+                          style={{margin:10}}
+                          fill
+                          onClick={() => {
+                            download(
+                              "/outputs/output_" +
+                                this.state.outputId +
+                                "_switch.eps",
+                              "output-" + this.state.outputId + ".eps",
+                              "application/postscript"
+                            );
+                          }}
+                        >
+                          EPS
+                        </EuiButton>
+                        </div>
+                        <img
+                          style={{ width: "100%" }}
+                          src={
+                            "/outputs/output_" +
+                            this.state.outputId +
+                            "_switch.svg"
+                          }
+                        />
+                      </div>
+                    ) : (
+                      <p>Generated SVG will be shown here.</p>
+                    )}
                     <EuiSpacer />
                   </EuiFlexItem>
                 </EuiFlexGroup>
-                  <span>{'Powered by https://github.com/swill/kad'}</span>
+                <span>{"Powered by https://github.com/swill/kad"}</span>
               </EuiPageContentBody>
             </EuiPageContent>
           </EuiPageBody>

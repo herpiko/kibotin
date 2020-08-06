@@ -7,6 +7,10 @@ services:
       name: api
       upstream: 172.17.0.1
       port: 8000
+    - prefix: /outputs
+      name: outputs
+      upstream: 172.17.0.1
+      port: 8000
     - prefix: /
       name: frontend
       upstream: 172.17.0.1
