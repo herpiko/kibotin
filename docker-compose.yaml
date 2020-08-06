@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+  proxy:
+    image: citradigital/proxy
+    restart: always
+    ports:
+    - 443:443
+    environment:
+    - DEBUG=1
+    volumes:
+    - ./certs/fullchain.pem:/fullchain.pem
+    - ./certs/privkey.pem:/privkey.pem
+    - ./services.yaml:/services.yaml:ro
+

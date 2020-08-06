@@ -1,0 +1,14 @@
+port: 443
+services:
+  - name: kibotin
+    hostname: "localhost"
+    routes:
+    - prefix: /api
+      name: api
+      upstream: 172.17.0.1
+      port: 8000
+    - prefix: /
+      name: frontend
+      upstream: 172.17.0.1
+      port: 3000
+

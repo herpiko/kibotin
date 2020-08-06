@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.selection:hover {
+  border:1px solid lightgrey;
+  cursor:pointer;
+}
+
+.selected {
+  border:1px solid #006BB4;
+}
