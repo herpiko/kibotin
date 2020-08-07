@@ -1,6 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import {SWITCH_TYPE} from '../constants/SWITCH_TYPE';
+import {EuiFormRow} from '@elastic/eui';
 
 const SWITCH_PLACEHOLDER = [
   require('../assets/switch_type_classic.png'),
@@ -18,28 +19,33 @@ export const SwitchCutoutSelector = (props) => {
   } = props;
 
   return (
-    <div>
-      {switchOptions
-        .map((option, index) => (
-          <div style={{ display: "inline-block", margin: 5 }} key={index}>
-            <img
-              alt={"switch type " + option.text}
-              className={
-                switchType === option.value
-                  ? "selection selected"
-                  : "selection"
-              }
-              src={SWITCH_PLACEHOLDER[index]}
-              onClick={() => {
-                onChange(option.value)
-              }}
-              width="60"
-            />
-            <p style={{ fontSize: 10 }}>{option.text}</p>
-          </div>
-        ))
-      }
-    </div>
+    <EuiFormRow
+      label="Switch type"
+      helpText="http://builder-docs.swillkb.com/features/#switch-type"
+    >
+      <React.Fragment>
+        {switchOptions
+          .map((option, index) => (
+            <div style={{display: 'inline-block', margin: 5}} key={index}>
+              <img
+                alt={'switch type ' + option.text}
+                className={
+                  switchType === option.value
+                    ? 'selection selected'
+                    : 'selection'
+                }
+                src={SWITCH_PLACEHOLDER[index]}
+                onClick={() => {
+                  onChange(option.value)
+                }}
+                width="60"
+              />
+              <p style={{fontSize: 10}}>{option.text}</p>
+            </div>
+          ))
+        }
+      </React.Fragment>
+    </EuiFormRow>
   )
 };
 
