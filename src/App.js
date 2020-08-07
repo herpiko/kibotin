@@ -228,51 +228,45 @@ class App extends React.Component {
                     {this.state.outputId && this.state.outputId.length > 0 ? (
                       <div>
                         <div>
-                        <EuiButton
-                          style={{margin:10}}
-                          fill
-                          onClick={() => {
-                            download(
-                              "/outputs/output_" +
-                                this.state.outputId +
-                                "_switch.svg",
-                              "output-" + this.state.outputId + ".svg",
-                              "image/svg+xml"
-                            );
-                          }}
-                        >
-                          SVG
-                        </EuiButton>
-                        <EuiButton
-                          style={{margin:10}}
-                          fill
-                          onClick={() => {
-                            download(
-                              "/outputs/output_" +
-                                this.state.outputId +
-                                "_switch.dxf",
-                              "output-" + this.state.outputId + ".dxf",
-                              "image/vnd.dwg"
-                            );
-                          }}
-                        >
-                          DXF
-                        </EuiButton>
-                        <EuiButton
-                          style={{margin:10}}
-                          fill
-                          onClick={() => {
-                            download(
-                              "/outputs/output_" +
-                                this.state.outputId +
-                                "_switch.eps",
-                              "output-" + this.state.outputId + ".eps",
-                              "application/postscript"
-                            );
-                          }}
-                        >
-                          EPS
-                        </EuiButton>
+                          <EuiButton
+                            style={{ margin: 10 }}
+                            fill
+                            onClick={() => {
+                              download(
+                                "/outputs/output_" +
+                                  this.state.outputId +
+                                  "_switch.svg"
+                              );
+                            }}
+                          >
+                            SVG
+                          </EuiButton>
+                          <EuiButton
+                            style={{ margin: 10 }}
+                            fill
+                            onClick={() => {
+                              download(
+                                "/outputs/output_" +
+                                  this.state.outputId +
+                                  "_switch.dxf"
+                              );
+                            }}
+                          >
+                            DXF
+                          </EuiButton>
+                          <EuiButton
+                            style={{ margin: 10 }}
+                            fill
+                            onClick={() => {
+                              download(
+                                "/outputs/output_" +
+                                  this.state.outputId +
+                                  "_switch.eps"
+                              );
+                            }}
+                          >
+                            EPS
+                          </EuiButton>
                         </div>
                         <img
                           style={{ width: "100%" }}
@@ -289,7 +283,11 @@ class App extends React.Component {
                     <EuiSpacer />
                   </EuiFlexItem>
                 </EuiFlexGroup>
-                <span>{"Powered by https://github.com/swill/kad"}</span>
+                <span>
+                  Powered by <a href="https://github.com/swill/kad">kad</a>.
+                  Source code is available on{" "}
+                  <a href="https://github.com/herpiko/kibotin">GitHub</a>.
+                </span>
               </EuiPageContentBody>
             </EuiPageContent>
           </EuiPageBody>
