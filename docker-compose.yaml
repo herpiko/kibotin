@@ -1,5 +1,11 @@
 version: '3.1'
 services:
+  app:
+    image: herpiko/kibotin-app:latest
+  api:
+    image: herpiko/kibotin-api:latest
+    volumes:
+    - ./outputs:/dist/outputs
   proxy:
     image: citradigital/proxy
     restart: always
