@@ -4,9 +4,7 @@ import {
   EuiButton,
   EuiForm,
   EuiFormRow,
-  EuiLink,
   EuiSpacer,
-  EuiText,
   EuiPage,
   EuiPageBody,
   EuiPageContent,
@@ -20,13 +18,15 @@ import {
 } from "@elastic/eui";
 import {STAB_TYPE} from './constants/STAB_TYPE';
 import {SWITCH_TYPE} from './constants/SWITCH_TYPE';
-import {Footer} from './components/Footer';
-import {Result} from './components/Result';
-import {Download} from './components/Download';
-import {SwitchCutoutSelector} from './components/SwitchCutoutSelector';
-import {StabCutoutSelector} from './components/StabCutoutSelector';
-import {KerfInput} from './components/KerfInput';
-import {CornerRadius} from './components/CornerRadius';
+import {
+  CornerRadius,
+  Download,
+  Footer,
+  KerfInput,
+  Result,
+  StabCutoutSelector,
+  SwitchCutoutSelector
+} from './components';
 import { toast } from 'react-toastify';
 
 export const Kibotin = () => {
@@ -91,30 +91,9 @@ export const Kibotin = () => {
                         onChange={(event) => setLayout(event.target.value)}
                       />
                     </EuiFormRow>
-                    <EuiFormRow
-                      label="Switch type"
-                      helpText="http://builder-docs.swillkb.com/features/#switch-type"
-                    >
-                      <SwitchCutoutSelector switchType={switchType} onChange={value => setSwitchType(value)}/>
-                    </EuiFormRow>
-                    <EuiFormRow
-                      label="Stabilizer type"
-                      labelAppend={
-                        <EuiText size="xs">
-                          <EuiLink href="http://builder-docs.swillkb.com/features/#stabilizer-type">
-                            Help
-                          </EuiLink>
-                        </EuiText>
-                      }
-                    >
-                      <StabCutoutSelector stabType={stabType} onChange={value => setStabType(value)}/>
-                    </EuiFormRow>
-                    <EuiFormRow
-                      label="Kerf"
-                      helpText="Use dot as decimal separator"
-                    >
-                      <KerfInput onChange={value => setKerf(value)}/>
-                    </EuiFormRow>
+                    <SwitchCutoutSelector switchType={switchType} onChange={value => setSwitchType(value)}/>
+                    <StabCutoutSelector stabType={stabType} onChange={value => setStabType(value)}/>
+                    <KerfInput onChange={value => setKerf(value)}/>
                     <CornerRadius onChange={value => setCornerRadius(value)}/>
                     <EuiSpacer />
                     <EuiFormRow>

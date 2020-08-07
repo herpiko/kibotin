@@ -7,19 +7,17 @@ export const CornerRadius = (props) => {
     onChange
   } = props;
   return (
-    <React.Fragment>
-      <EuiFormRow
-        label="Corner Radius"
-      >
-        <EuiFieldText
-          style={{marginTop: 5}}
-          name="mount-holes"
-          type="text"
-          placeholder="Corner Radius / Edges Radius in mm"
-          onChange={event => onChange(parseInt(event.target.value, 10))}
-        />
-      </EuiFormRow>
-    </React.Fragment>
+    <EuiFormRow
+      label="Corner Radius"
+    >
+      <EuiFieldText
+        style={{marginTop: 5}}
+        name="mount-holes"
+        type="text"
+        placeholder="Corner Radius / Edges Radius in mm"
+        onChange={event => onChange(parseInt(event.target.value, 10))}
+      />
+    </EuiFormRow>
   )
 };
 
