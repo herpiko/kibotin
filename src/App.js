@@ -69,8 +69,8 @@ class App extends React.Component {
     }
     let payload = {};
     payload["layout"] = window.jsonl.parse("[" + this.state.layout + "]");
-    payload["switch-type"] = this.state.switchType;
-    payload["stab-type"] = this.state.stabType;
+    payload["switch-type"] = parseInt(this.state.switchType, 10)
+    payload["stab-type"] = parseInt(this.state.stabType, 10)
     if (this.state.useKerf) {
       payload["kerf"] = parseFloat(this.state.kerf);
     }
