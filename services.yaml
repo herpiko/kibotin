@@ -5,14 +5,14 @@ services:
     routes:
     - prefix: /api
       name: api
-      upstream: 172.17.0.1
+      upstream: api
       port: 8000
     - prefix: /outputs
       name: outputs
-      upstream: 172.17.0.1
+      upstream: api
       port: 8000
     - prefix: /
       name: frontend
-      upstream: 172.17.0.1
+      upstream: app
       port: 3000
 
