@@ -57,15 +57,6 @@ export const Kibotin = () => {
         alert("An error occured: " + error)
       })
   };
-  useCallback(() => {
-    setPayload({
-      ...payload,
-      layout: [layout],
-      "switch-type": switchType,
-      "stab-type": stabType,
-      kerf
-    })
-  }, [payload, setPayload, layout, switchType, stabType, kerf]);
 
   return (
     <div className="App">
