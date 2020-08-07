@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {Kibotin} from './Kibotin';
+import './App.css';
+import '@elastic/eui/dist/eui_theme_light.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Kibotin />
+    <ToastContainer />
   </React.StrictMode>,
   document.getElementById('root')
 );
