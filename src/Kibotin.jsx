@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
 import {
   EuiButton,
@@ -26,18 +26,21 @@ import {Download} from './components/Download';
 import {SwitchCutoutSelector} from './components/SwitchCutoutSelector';
 import {StabCutoutSelector} from './components/StabCutoutSelector';
 import {KerfInput} from './components/KerfInput';
+import { toast } from 'react-toastify';
 
 export const Kibotin = () => {
   const [kerf, setKerf] = useState(0);
   const [layout, setLayout] = useState("");
   const [stabType, setStabType] = useState(STAB_TYPE.CHERRY_COSTAR.value);
   const [switchType, setSwitchType] = useState(SWITCH_TYPE.CLASSIC_MX.value);
-  const [payload, setPayload] = useState({});
   const [outputId, setOutputId] = useState(null);
 
   const generate = () => {
     if (!layout) {
-      alert("Layout's RAW value should not be empty.");
+      toast.warn("Layout's RAW value should not be empty.", {
+        position: 'top-center',
+        hideProgressBar: true
+      });
       return false;
     }
     const payload = {
@@ -54,7 +57,9 @@ export const Kibotin = () => {
       })
       .catch(error => {
         console.error(error);
-        alert("An error occured: " + error)
+        toast.error("An error occured: " + error, {
+          position: 'top-center'
+        })
       })
   };
 
