@@ -26,6 +26,7 @@ import {Download} from './components/Download';
 import {SwitchCutoutSelector} from './components/SwitchCutoutSelector';
 import {StabCutoutSelector} from './components/StabCutoutSelector';
 import {KerfInput} from './components/KerfInput';
+import {CornerRadius} from './components/CornerRadius';
 import { toast } from 'react-toastify';
 
 export const Kibotin = () => {
@@ -33,6 +34,7 @@ export const Kibotin = () => {
   const [layout, setLayout] = useState("");
   const [stabType, setStabType] = useState(STAB_TYPE.CHERRY_COSTAR.value);
   const [switchType, setSwitchType] = useState(SWITCH_TYPE.CLASSIC_MX.value);
+  const [cornerRadius, setCornerRadius] = useState(null);
   const [outputId, setOutputId] = useState(null);
 
   const generate = () => {
@@ -47,6 +49,7 @@ export const Kibotin = () => {
       layout: window.jsonl.parse("[" + layout + "]"),
       "switch-type": switchType,
       "stab-type": stabType,
+      "fillet": cornerRadius,
       kerf
     };
 
@@ -112,6 +115,7 @@ export const Kibotin = () => {
                     >
                       <KerfInput onChange={value => setKerf(value)}/>
                     </EuiFormRow>
+                    <CornerRadius onChange={value => setCornerRadius(value)}/>
                     <EuiSpacer />
                     <EuiFormRow>
                       <EuiButton fill onClick={generate}>
